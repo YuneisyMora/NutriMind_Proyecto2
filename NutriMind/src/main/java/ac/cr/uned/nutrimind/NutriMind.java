@@ -4,10 +4,7 @@
 
 package ac.cr.uned.nutrimind;
 
-/**
- *
- * @author micha
- */
+
 public class NutriMind {
 
     public static void main(String[] args) {
