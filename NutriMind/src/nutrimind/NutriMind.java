@@ -5,8 +5,9 @@
 package nutrimind;
 
 /**
+ * 
+ * 
  *
- * @author micha
  */
 public class NutriMind {
 
