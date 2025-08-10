@@ -6,7 +6,7 @@ package ac.cr.uned.nutrimind.vistas;
 
 /**
  *
- * @author micha
+ * 
  */
 public class Evaluar_paciente_vista extends javax.swing.JFrame {
     

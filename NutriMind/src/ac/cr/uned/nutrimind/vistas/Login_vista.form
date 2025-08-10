@@ -34,12 +34,10 @@
               <EmptySpace pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="crear_cuenta_btn" pref="149" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="entrar_btn" pref="149" max="32767" attributes="0"/>
-                      <Component id="login_lbl" min="-2" max="-2" attributes="0"/>
-                      <Component id="usuario_txtf" max="32767" attributes="0"/>
-                      <Component id="contrasena_txtf" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="entrar_btn" pref="149" max="32767" attributes="0"/>
+                  <Component id="login_lbl" min="-2" max="-2" attributes="0"/>
+                  <Component id="usuario_txtf" max="32767" attributes="0"/>
+                  <Component id="contrasena_txtf" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
           </Group>

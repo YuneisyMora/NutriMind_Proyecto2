@@ -6,7 +6,7 @@ package ac.cr.uned.nutrimind.vistas;
 
 /**
  *
- * @author micha
+ * 
  */
 public class Buscar_paciente_vista extends javax.swing.JFrame {
     
@@ -28,21 +28,82 @@ public class Buscar_paciente_vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        buscar_pac_lbl = new javax.swing.JLabel();
+        id_lbl = new javax.swing.JLabel();
+        id_txt = new javax.swing.JTextField();
+        buscar_btn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        info_txtarea = new javax.swing.JTextArea();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        buscar_pac_lbl.setText("Buscar Paciente");
+
+        id_lbl.setText("Identificación: ");
+
+        id_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_txtActionPerformed(evt);
+            }
+        });
+
+        buscar_btn.setText("Buscar");
+        buscar_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar_btnActionPerformed(evt);
+            }
+        });
+
+        info_txtarea.setColumns(20);
+        info_txtarea.setRows(5);
+        jScrollPane1.setViewportView(info_txtarea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(405, 405, 405)
+                        .addComponent(buscar_pac_lbl))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(id_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(buscar_btn)))))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(buscar_pac_lbl)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_lbl)
+                    .addComponent(id_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscar_btn))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void id_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_txtActionPerformed
+
+    private void buscar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscar_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +131,11 @@ public class Buscar_paciente_vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscar_btn;
+    private javax.swing.JLabel buscar_pac_lbl;
+    private javax.swing.JLabel id_lbl;
+    private javax.swing.JTextField id_txt;
+    private javax.swing.JTextArea info_txtarea;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

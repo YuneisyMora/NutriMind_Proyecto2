@@ -6,7 +6,6 @@ package ac.cr.uned.nutrimind.vistas;
 
 /**
  *
- * @author micha
  */
 public class Login_vista extends javax.swing.JFrame {
     

@@ -4,7 +4,11 @@
  */
 package ac.cr.uned.nutrimind;
 
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
 import ac.cr.uned.nutrimind.vistas.Login_vista;
+import java.sql.SQLException;
+import java.util.AbstractList;
+import java.util.List;
 import javax.swing.SwingUtilities;
 
 /**
@@ -26,6 +30,16 @@ public class NutriMind {
             loginWindow.setResizable(false);
             loginWindow.setVisible(true);
         });
+        
+        try{
+            for (String u : DatabaseManager.obtenerUsuarios()) {
+                System.out.println("Usuario: " + u);
+            }
+        }catch (Exception ex){
+             ex.printStackTrace();
+        }
+        
+        
     }
     
 }

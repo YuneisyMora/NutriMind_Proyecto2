@@ -6,7 +6,7 @@ package ac.cr.uned.nutrimind.vistas;
 
 /**
  *
- * @author micha
+ *
  */
 public class Admin_vista extends javax.swing.JFrame {
     
