@@ -6,7 +6,9 @@ package ac.cr.uned.nutrimind.vistas;
 
 import ac.cr.uned.nutrimind.modelos.Usuario;
 import ac.cr.uned.nutrimind.resources.DatabaseManager;
+import java.awt.Image;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -22,6 +24,15 @@ public class Login_vista extends javax.swing.JFrame {
      */
     public Login_vista() {
         initComponents();
+        
+        
+        ImageIcon label_icon = new ImageIcon(getClass().getResource("/ac/cr/uned/nutrimind/resources/nutrimind_logo.png"));
+        Image scaledImage = label_icon.getImage().getScaledInstance(
+        nutrimind_lbl.getWidth(), 
+        nutrimind_lbl.getHeight(), 
+        Image.SCALE_SMOOTH
+    );
+        nutrimind_lbl.setIcon(new ImageIcon(scaledImage));
     }
 
     /**
@@ -70,12 +81,10 @@ public class Login_vista extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(nutrimind_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(321, 321, 321)
+                .addGap(24, 24, 24)
+                .addComponent(nutrimind_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usuario_lbl)
                     .addComponent(contrasena_lbl))
@@ -91,22 +100,25 @@ public class Login_vista extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(login_lbl)
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usuario_lbl)
-                    .addComponent(usuario_txtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(nutrimind_lbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contrasena_lbl)
-                    .addComponent(contrasena_txtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addComponent(entrar_btn)
-                .addGap(34, 34, 34)
-                .addComponent(crear_cuenta_btn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(login_lbl)
+                        .addGap(77, 77, 77)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usuario_lbl)
+                            .addComponent(usuario_txtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(contrasena_lbl)
+                            .addComponent(contrasena_txtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addComponent(entrar_btn)
+                        .addGap(34, 34, 34)
+                        .addComponent(crear_cuenta_btn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(nutrimind_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
 

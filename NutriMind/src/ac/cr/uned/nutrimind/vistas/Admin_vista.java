@@ -4,6 +4,8 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 /**
@@ -19,6 +21,14 @@ public class Admin_vista extends javax.swing.JFrame {
      */
     public Admin_vista() {
         initComponents();
+        
+        ImageIcon label_icon = new ImageIcon(getClass().getResource("/ac/cr/uned/nutrimind/resources/nutrimind_logo.png"));
+        Image scaledImage = label_icon.getImage().getScaledInstance(
+        admin_lbl.getWidth(), 
+        admin_lbl.getHeight(), 
+        Image.SCALE_SMOOTH
+    );
+        admin_lbl.setIcon(new ImageIcon(scaledImage));
     }
 
     /**
@@ -68,31 +78,31 @@ public class Admin_vista extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(admin_lbl))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(392, 392, 392)
-                        .addComponent(bienvenida_lbl)))
-                .addContainerGap(347, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(agregar_paciente_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(buscar_paciente_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104)
                 .addComponent(historial_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(admin_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(bienvenida_lbl)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(bienvenida_lbl)
-                .addGap(35, 35, 35)
-                .addComponent(admin_lbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(bienvenida_lbl))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(admin_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(historial_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(agregar_paciente_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
