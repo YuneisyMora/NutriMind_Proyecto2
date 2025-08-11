@@ -49,7 +49,7 @@ public class Asistente_vista extends javax.swing.JFrame {
 
         asist_lbl.setText("Imagen");
 
-        bienvenida_lbl.setText("Bienvenida Label (Asist)");
+        bienvenida_lbl.setText("Bienvenido/a Asistente");
 
         agregar_paciente_btn1.setText("Agregar Paciente");
         agregar_paciente_btn1.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +74,7 @@ public class Asistente_vista extends javax.swing.JFrame {
                 .addComponent(asist_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(bienvenida_lbl)
-                .addContainerGap(436, Short.MAX_VALUE))
+                .addContainerGap(440, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(178, 178, 178)
                 .addComponent(agregar_paciente_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
