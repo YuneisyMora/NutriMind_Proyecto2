@@ -4,7 +4,9 @@ package ac.cr.uned.nutrimind.resources;
 
 import ac.cr.uned.nutrimind.modelos.Evaluacion;
 import ac.cr.uned.nutrimind.modelos.Paciente;
+import ac.cr.uned.nutrimind.modelos.PlanAlimentacion;
 import ac.cr.uned.nutrimind.modelos.Usuario;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +116,7 @@ public class DatabaseManager {
     // =========================
 
     public static void insertarEvaluacion(Evaluacion evaluacion) throws SQLException {
-        String sql = "INSERT INTO Evaluaciones (paciente_id, nutricionista_id, fecha_evaluacion, peso, altura, nivel_actividad_fisica, imc, categoria_imc, recomendaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Evaluaciones (paciente_identificacion, nutricionista_id, fecha_evaluacion, peso, altura, nivel_actividad_fisica, imc, categoria_imc, recomendaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setString(1, evaluacion.getPacienteId());
             ps.setInt(2, evaluacion.getNutricionistaId());
@@ -133,20 +135,18 @@ public class DatabaseManager {
     // MÉTODOS PARA PLANES ALIMENTACIÓN
     // ==============================
 
-    public static void insertarPlan(int pacienteId, int nutricionistaId, String fechaInicio, String fechaFinal,
-                                    String planTexto, String macronutrientes, int comidasDia,
-                                    String alimentosRecomendados, String observaciones) throws SQLException {
-        String sql = "INSERT INTO Planes_Alimentacion (paciente_id, nutricionista_id, fecha_inicio, fecha_final, plan_texto, macronutrientes, comidas_dia, alimentos_recomendados, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static void insertarPlan(PlanAlimentacion plan) throws SQLException {
+        String sql = "INSERT INTO Planes_Alimentacion (paciente_identificacion, nutricionista_id, fecha_inicio, fecha_final, plan_texto, macronutrientes, comidas_dia, alimentos_recomendados, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
-            ps.setInt(1, pacienteId);
-            ps.setInt(2, nutricionistaId);
-            ps.setString(3, fechaInicio);
-            ps.setString(4, fechaFinal);
-            ps.setString(5, planTexto);
-            ps.setString(6, macronutrientes);
-            ps.setInt(7, comidasDia);
-            ps.setString(8, alimentosRecomendados);
-            ps.setString(9, observaciones);
+            ps.setString(1, plan.getPacienteId());
+            ps.setInt(2, plan.getNutricionistaId());
+            ps.setString(3, plan.getFechaInicio());
+            ps.setString(4, plan.getFechaFinal());
+            ps.setString(5, plan.getPlanTexto());
+            ps.setString(6, plan.getMacronutrientes());
+            ps.setInt(7, plan.getComidasDia());
+            ps.setString(8, plan.getAlimentosRecomendados());
+            ps.setString(9, plan.getObservaciones());
             ps.executeUpdate();
         }
     }
@@ -317,6 +317,39 @@ public static Paciente obtenerPacientePorIdentificacion(String identificacion) t
     return null; 
 }
 
+
+
+
+public static List<Evaluacion> obtenerEvaluacionesPorIdentificacion(String identificacion) throws SQLException {
+    String sql = """
+        SELECT e.paciente_identificacion, e.fecha_evaluacion, e.peso, e.altura, e.nivel_actividad_fisica,
+               e.imc, e.categoria_imc, e.recomendaciones
+        FROM Evaluaciones e
+        INNER JOIN Pacientes p ON e.paciente_identificacion = p.identificacion
+        WHERE p.identificacion = ?
+        ORDER BY e.fecha_evaluacion DESC
+    """;
+
+    List<Evaluacion> lista = new ArrayList<>();
+    try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+        ps.setString(1, identificacion.trim());
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Evaluacion eval = new Evaluacion();
+                eval.setPacienteId(rs.getString("paciente_identificacion"));
+                eval.setFechaEvaluacion(rs.getString("fecha_evaluacion"));
+                eval.setPeso(BigDecimal.valueOf(rs.getDouble("peso")));
+                eval.setAltura(BigDecimal.valueOf(rs.getDouble("altura")));
+                eval.setNivelActividadFisica(rs.getString("nivel_actividad_fisica"));
+                eval.setImc(BigDecimal.valueOf(rs.getDouble("imc")));
+                eval.setCategoriaImc(rs.getString("categoria_imc"));
+                eval.setRecomendaciones(rs.getString("recomendaciones"));
+                lista.add(eval);
+            }
+        }
+    }
+    return lista;
+}
 
 
 

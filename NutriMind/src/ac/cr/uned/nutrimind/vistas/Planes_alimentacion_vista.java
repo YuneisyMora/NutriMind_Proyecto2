@@ -4,6 +4,12 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import ac.cr.uned.nutrimind.modelos.Paciente;
+import ac.cr.uned.nutrimind.modelos.PlanAlimentacion;
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+
 /**
  *
  *
@@ -62,6 +68,11 @@ public class Planes_alimentacion_vista extends javax.swing.JFrame {
         id_lbl.setText("Identificación: ");
 
         buscar_btn.setText("Buscar");
+        buscar_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar_btnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Fecha Creación: ");
 
@@ -218,7 +229,68 @@ public class Planes_alimentacion_vista extends javax.swing.JFrame {
 
     private void guardar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_btnActionPerformed
         // TODO add your handling code here:
+        
+        String fecha_creacion = fecha_creacion_txt.getText().trim();
+        String fecha_final = fecha_final_txt.getText().trim();
+        String nutricionista = nutri_txt.getText().trim();
+        String plan_nutricional = plan_txtarea.getText();
+        StringBuilder macronutrientes = new StringBuilder();
+        
+        if(carb_checkbox.isSelected()){
+            macronutrientes.append(carb_checkbox.getText()).append(" ");
+            
+        }
+        
+        if(prot_checkbox.isSelected()){
+            macronutrientes.append(prot_checkbox.getText()).append(" ");
+            
+        }
+        
+        if(grasa_checkbox.isSelected()){
+            macronutrientes.append(grasa_checkbox.getText()).append(" ");
+        }
+        
+        String macronutrientes_str = macronutrientes.toString();
+        
+        
+        String comidas_dia = comidas_dia_txt.getText().trim();
+        BigDecimal comidas_dia_BD = new BigDecimal(comidas_dia);
+        
+        String alimentos_rec = alimentos_rec_txtarea.getText().trim();
+        String observaciones = observ_txtarea.getText().trim(); 
+        
+        PlanAlimentacion plan = new PlanAlimentacion(id_txt.getText().trim(), Integer.parseInt(nutricionista), fecha_creacion, fecha_final, plan_nutricional, macronutrientes_str, Integer.parseInt(comidas_dia), alimentos_rec, observaciones);
+                
+        try{
+            DatabaseManager.insertarPlan(plan);
+            JOptionPane.showMessageDialog(null, 
+                        "Plan asociado con exito!");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        
+                
+                
     }//GEN-LAST:event_guardar_btnActionPerformed
+
+    private void buscar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_btnActionPerformed
+
+        // TODO add your handling code here:
+        String identificacion = id_txt.getText().trim();
+        Paciente paciente = new Paciente();
+        try{
+            paciente =  DatabaseManager.obtenerPacientePorIdentificacion(identificacion);
+            if(!paciente.equals(null)){
+                JOptionPane.showMessageDialog(null, 
+                        "Paciente encontrado!");
+            }else{
+                JOptionPane.showMessageDialog(null, 
+                        "Paciente no encontrado, registre al paciente primero");
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_buscar_btnActionPerformed
 
     /**
      * @param args the command line arguments

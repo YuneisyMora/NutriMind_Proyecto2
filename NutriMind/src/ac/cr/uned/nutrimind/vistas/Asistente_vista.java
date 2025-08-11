@@ -4,6 +4,8 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author micha
@@ -32,7 +34,6 @@ public class Asistente_vista extends javax.swing.JFrame {
         bienvenida_lbl = new javax.swing.JLabel();
         agregar_paciente_btn1 = new javax.swing.JButton();
         buscar_paciente_btn = new javax.swing.JButton();
-        historial_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,8 +55,6 @@ public class Asistente_vista extends javax.swing.JFrame {
             }
         });
 
-        historial_btn.setText("Historial Nutricional");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,18 +63,17 @@ public class Asistente_vista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(asist_lbl)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(agregar_paciente_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(110, 110, 110)
-                                .addComponent(buscar_paciente_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                                .addComponent(historial_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(asist_lbl))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(429, 429, 429)
                         .addComponent(bienvenida_lbl)))
-                .addGap(59, 59, 59))
+                .addContainerGap(436, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(agregar_paciente_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buscar_paciente_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(173, 173, 173))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,12 +82,11 @@ public class Asistente_vista extends javax.swing.JFrame {
                 .addComponent(bienvenida_lbl)
                 .addGap(65, 65, 65)
                 .addComponent(asist_lbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregar_paciente_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscar_paciente_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(historial_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(134, 134, 134))
+                    .addComponent(agregar_paciente_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(150, 150, 150))
         );
 
         pack();
@@ -97,10 +94,26 @@ public class Asistente_vista extends javax.swing.JFrame {
 
     private void agregar_paciente_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_paciente_btn1ActionPerformed
         // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> {
+            
+            Agrega_paciente_vista agregarPacienteWindow = new Agrega_paciente_vista(3);
+            agregarPacienteWindow.setLocationRelativeTo(null);
+            agregarPacienteWindow.setResizable(false);
+            agregarPacienteWindow.setVisible(true);
+        });
     }//GEN-LAST:event_agregar_paciente_btn1ActionPerformed
 
     private void buscar_paciente_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_paciente_btnActionPerformed
         // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> {
+            
+            Buscar_paciente_vista buscarPacienteWindow = new Buscar_paciente_vista();
+            buscarPacienteWindow.setLocationRelativeTo(null);
+            buscarPacienteWindow.setResizable(false);
+            buscarPacienteWindow.setVisible(true);
+        });
     }//GEN-LAST:event_buscar_paciente_btnActionPerformed
 
     /**
@@ -133,6 +146,5 @@ public class Asistente_vista extends javax.swing.JFrame {
     private javax.swing.JLabel asist_lbl;
     private javax.swing.JLabel bienvenida_lbl;
     private javax.swing.JButton buscar_paciente_btn;
-    private javax.swing.JButton historial_btn;
     // End of variables declaration//GEN-END:variables
 }

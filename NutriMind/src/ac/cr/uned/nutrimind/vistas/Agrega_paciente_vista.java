@@ -58,8 +58,6 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
         altura_txt = new javax.swing.JTextField();
         altura_lbl = new javax.swing.JLabel();
         peso_txt1 = new javax.swing.JTextField();
-        nivel_act_fis_lbl = new javax.swing.JLabel();
-        nivel_act_fis_cmbbox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,10 +98,6 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
 
         altura_lbl.setText("Altura (cm):");
 
-        nivel_act_fis_lbl.setText("Nivel Actividad Fisica:");
-
-        nivel_act_fis_cmbbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sedentario", "Moderadamente Activo", "Muy Activo", " " }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,15 +123,10 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(peso_lbl)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(altura_lbl)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(altura_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(nivel_act_fis_lbl)
-                            .addGap(18, 18, 18)
-                            .addComponent(nivel_act_fis_cmbbox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(altura_lbl)
+                        .addGap(85, 85, 85)
+                        .addComponent(altura_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(104, 104, 104))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -194,11 +183,7 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(altura_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(altura_lbl))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nivel_act_fis_lbl)
-                            .addComponent(nivel_act_fis_cmbbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(altura_lbl))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(agregar_btn)
                 .addGap(31, 31, 31))
@@ -326,8 +311,6 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField fecha_reg_txt;
     private javax.swing.JLabel id_lbl;
     private javax.swing.JTextField id_txt1;
-    private javax.swing.JComboBox<String> nivel_act_fis_cmbbox;
-    private javax.swing.JLabel nivel_act_fis_lbl;
     private javax.swing.JLabel nombre_lbl;
     private javax.swing.JTextField nombre_txt1;
     private javax.swing.JLabel peso_lbl;

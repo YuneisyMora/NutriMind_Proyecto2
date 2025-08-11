@@ -3,8 +3,8 @@ package ac.cr.uned.nutrimind.modelos;
 
 
 public class PlanAlimentacion {
-    private int id;
-    private int pacienteId;
+    
+    private String pacienteId;
     private int nutricionistaId;
     private String fechaInicio;  // sería mejor LocalDate
     private String fechaFinal;   // nullable
@@ -16,12 +16,12 @@ public class PlanAlimentacion {
 
     // Constructor, getters y setters
     public PlanAlimentacion() {}
-    public PlanAlimentacion(int id, int pacienteId, int nutricionistaId,
+    public PlanAlimentacion(String pacienteId, int nutricionistaId,
                            String fechaInicio, String fechaFinal,
                            String planTexto, String macronutrientes,
                            int comidasDia, String alimentosRecomendados,
                            String observaciones) {
-        this.id = id;
+        
         this.pacienteId = pacienteId;
         this.nutricionistaId = nutricionistaId;
         this.fechaInicio = fechaInicio;
@@ -32,10 +32,10 @@ public class PlanAlimentacion {
         this.alimentosRecomendados = alimentosRecomendados;
         this.observaciones = observaciones;
     }
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public int getPacienteId() { return pacienteId; }
-    public void setPacienteId(int pacienteId) { this.pacienteId = pacienteId; }
+    //public int getId() { return id; }
+    //public void setId(int id) { this.id = id; }
+    public String getPacienteId() { return pacienteId; }
+    public void setPacienteId(String pacienteId) { this.pacienteId = pacienteId; }
     public int getNutricionistaId() { return nutricionistaId; }
     public void setNutricionistaId(int nutricionistaId) { this.nutricionistaId = nutricionistaId; }
     public String getFechaInicio() { return fechaInicio; }

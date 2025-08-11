@@ -4,6 +4,8 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  *
@@ -15,8 +17,12 @@ public class Nutricionista_vista extends javax.swing.JFrame {
     /**
      * Creates new form Nutricionista_vista
      */
-    public Nutricionista_vista() {
+    public Nutricionista_vista(int rol) {
         initComponents();
+    }
+
+    private Nutricionista_vista() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -40,7 +46,7 @@ public class Nutricionista_vista extends javax.swing.JFrame {
 
         nutri_lbl.setText("Imagen");
 
-        bienvenida_lbl.setText("Bienvenida Label (Nutri)");
+        bienvenida_lbl.setText("Bienvenido/a Nutricionista");
 
         historial_btn.setText("Historial Nutricional");
         historial_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -134,22 +140,59 @@ public class Nutricionista_vista extends javax.swing.JFrame {
 
     private void historial_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historial_btnActionPerformed
         // TODO add your handling code here:
+         SwingUtilities.invokeLater(() -> {
+            
+            Historial_vista historialWindow = new Historial_vista();
+            historialWindow.setLocationRelativeTo(null);
+            historialWindow.setResizable(false);
+            historialWindow.setVisible(true);
+        });
     }//GEN-LAST:event_historial_btnActionPerformed
 
     private void agregar_paciente_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_paciente_btn1ActionPerformed
         // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> {
+            
+            Agrega_paciente_vista agregarPacienteWindow = new Agrega_paciente_vista(2);
+            agregarPacienteWindow.setLocationRelativeTo(null);
+            agregarPacienteWindow.setResizable(false);
+            agregarPacienteWindow.setVisible(true);
+        });
     }//GEN-LAST:event_agregar_paciente_btn1ActionPerformed
 
     private void evaluar_paciente_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluar_paciente_btn1ActionPerformed
         // TODO add your handling code here:
+        SwingUtilities.invokeLater(() -> {
+            
+            Evaluar_paciente_vista evaluarPacienteWindow = new Evaluar_paciente_vista();
+            evaluarPacienteWindow.setLocationRelativeTo(null);
+            evaluarPacienteWindow.setResizable(false);
+            evaluarPacienteWindow.setVisible(true);
+        });
     }//GEN-LAST:event_evaluar_paciente_btn1ActionPerformed
 
     private void generacion_plan_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generacion_plan_btn1ActionPerformed
         // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> {
+            
+            Planes_alimentacion_vista planWindow = new Planes_alimentacion_vista();
+            planWindow.setLocationRelativeTo(null);
+            planWindow.setResizable(false);
+            planWindow.setVisible(true);
+        });
     }//GEN-LAST:event_generacion_plan_btn1ActionPerformed
 
     private void buscar_paciente_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_paciente_btnActionPerformed
         // TODO add your handling code here:
+        SwingUtilities.invokeLater(() -> {
+            
+            Buscar_paciente_vista buscarPacienteWindow = new Buscar_paciente_vista();
+            buscarPacienteWindow.setLocationRelativeTo(null);
+            buscarPacienteWindow.setResizable(false);
+            buscarPacienteWindow.setVisible(true);
+        });
     }//GEN-LAST:event_buscar_paciente_btnActionPerformed
 
     /**

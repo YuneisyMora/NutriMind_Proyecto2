@@ -4,6 +4,11 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import ac.cr.uned.nutrimind.modelos.Evaluacion;
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * 
@@ -33,7 +38,7 @@ public class Historial_vista extends javax.swing.JFrame {
         id_txt = new javax.swing.JTextField();
         buscar_btn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        evaluaciones_table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,7 +59,7 @@ public class Historial_vista extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        evaluaciones_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,7 +70,7 @@ public class Historial_vista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(evaluaciones_table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,6 +117,35 @@ public class Historial_vista extends javax.swing.JFrame {
 
     private void buscar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_btnActionPerformed
         // TODO add your handling code here:
+        
+        String identificacion = id_txt.getText().trim(); 
+        
+        try{
+             List<Evaluacion> evaluaciones = DatabaseManager.obtenerEvaluacionesPorIdentificacion(identificacion);
+             
+             String[] columnas = {"Paciente ID","Fecha", "Peso (kg)", "Altura (cm)", "Nivel Actividad", "IMC", "Categoría IMC", "Recomendaciones"};
+             DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+             
+             for (Evaluacion e : evaluaciones) {
+                Object[] fila = {
+                    e.getPacienteId(),
+                    e.getFechaEvaluacion(),
+                    e.getPeso(),
+                    e.getAltura(),
+                    e.getNivelActividadFisica(),
+                    e.getImc(),
+                    e.getCategoriaImc(),
+                    e.getRecomendaciones()
+                };
+                modelo.addRow(fila);
+                
+                evaluaciones_table.setModel(modelo);
+    }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
     }//GEN-LAST:event_buscar_btnActionPerformed
 
     /**
@@ -141,10 +175,10 @@ public class Historial_vista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar_btn;
+    private javax.swing.JTable evaluaciones_table;
     private javax.swing.JLabel id_lbl;
     private javax.swing.JTextField id_txt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

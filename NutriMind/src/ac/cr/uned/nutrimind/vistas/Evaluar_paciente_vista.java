@@ -195,7 +195,7 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
         double imc = DatabaseManager.calcularIMC(Double.parseDouble(peso), Double.parseDouble(altura));
         String categoria_imc = DatabaseManager.clasificarIMC(imc);
         String recomendaciones = DatabaseManager.recomendacionesPorIMC(imc);
-        String nivel_actividad_fisica = DatabaseManager.clasificarNivelActividadFisica(imc);
+        String nivel_actividad_fisica = nivel_act_fis_cmbbox.getSelectedItem().toString();
         
         Evaluacion eval = new Evaluacion(id_txt.getText().trim(), 2, fecha_eval, pesoBD, alturaBD, nivel_actividad_fisica, BigDecimal.valueOf(imc), categoria_imc, recomendaciones);
         

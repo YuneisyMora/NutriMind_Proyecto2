@@ -93,7 +93,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="bienvenida_lbl">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Bienvenida Label (Nutri)"/>
+        <Property name="text" type="java.lang.String" value="Bienvenido/a Nutricionista"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="historial_btn">
