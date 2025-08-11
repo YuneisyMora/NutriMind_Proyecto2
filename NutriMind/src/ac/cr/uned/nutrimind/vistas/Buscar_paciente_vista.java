@@ -4,6 +4,9 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import ac.cr.uned.nutrimind.modelos.Paciente;
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
+
 /**
  *
  * 
@@ -103,6 +106,27 @@ public class Buscar_paciente_vista extends javax.swing.JFrame {
 
     private void buscar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_btnActionPerformed
         // TODO add your handling code here:
+        
+        String identificacion = id_txt.getText().trim(); 
+        Paciente paciente_base_datos = new Paciente();
+        
+        try{
+            paciente_base_datos = DatabaseManager.obtenerPacientePorIdentificacion(identificacion);
+            
+            String texto = "INFORMACION DE PACIENTE " + "\n" + "Identificación: " + paciente_base_datos.getIdentificacion() + "\n" +
+                    "Nombre completo: " + paciente_base_datos.getNombre() + " " + paciente_base_datos.getApellidos() + "\n" + 
+                    "Fecha Nacimiento: " + paciente_base_datos.getFechaNacimiento() + "\n" + 
+                    "Sexo: " + paciente_base_datos.getSexo() + "\n" + 
+                    "Fecha Registro: " + paciente_base_datos.getFechaRegistro() + "\n";
+            
+            
+            info_txtarea.setText(texto);               
+            
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        
+        
     }//GEN-LAST:event_buscar_btnActionPerformed
 
     /**

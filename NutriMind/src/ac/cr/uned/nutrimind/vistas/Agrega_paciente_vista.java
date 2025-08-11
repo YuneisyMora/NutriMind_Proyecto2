@@ -4,6 +4,13 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import ac.cr.uned.nutrimind.modelos.Evaluacion;
+import ac.cr.uned.nutrimind.modelos.Paciente;
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * 
@@ -15,8 +22,13 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
     /**
      * Creates new form Agrega_paciente_vista
      */
-    public Agrega_paciente_vista() {
+    public Agrega_paciente_vista(int rol) {
+        this.rol = rol; 
         initComponents();
+    }
+
+    Agrega_paciente_vista() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -43,7 +55,7 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
         fecha_reg_txt = new javax.swing.JFormattedTextField();
         agregar_btn = new javax.swing.JButton();
         peso_lbl = new javax.swing.JLabel();
-        peso_txt = new javax.swing.JTextField();
+        altura_txt = new javax.swing.JTextField();
         altura_lbl = new javax.swing.JLabel();
         peso_txt1 = new javax.swing.JTextField();
         nivel_act_fis_lbl = new javax.swing.JLabel();
@@ -65,19 +77,24 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
 
         sexo_lbl.setText("Sexo: ");
 
-        sexo_cmbbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Masculino", "Femenino", " " }));
+        sexo_cmbbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F", " " }));
 
         fecha_reg_lbl.setText("Fecha Registro: ");
 
         fecha_reg_txt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         agregar_btn.setText("Agregar Paciente");
+        agregar_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_btnActionPerformed(evt);
+            }
+        });
 
         peso_lbl.setText("Peso (kg): ");
 
-        peso_txt.addActionListener(new java.awt.event.ActionListener() {
+        altura_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                peso_txtActionPerformed(evt);
+                altura_txtActionPerformed(evt);
             }
         });
 
@@ -94,21 +111,21 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(id_lbl)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(apellidos_lbl)
-                            .addComponent(nombre_lbl)
-                            .addComponent(fecha_nac_lbl)
-                            .addComponent(sexo_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fecha_reg_lbl))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nombre_txt1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(apellidos_txt)
-                            .addComponent(fecha_nac_txt)
-                            .addComponent(sexo_cmbbox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fecha_reg_txt))))
+                    .addComponent(apellidos_lbl)
+                    .addComponent(nombre_lbl)
+                    .addComponent(fecha_nac_lbl)
+                    .addComponent(sexo_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha_reg_lbl)
+                    .addComponent(id_lbl))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(id_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(nombre_txt1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(apellidos_txt)
+                        .addComponent(fecha_nac_txt)
+                        .addComponent(sexo_cmbbox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fecha_reg_txt)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(peso_lbl)
@@ -116,7 +133,7 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(altura_lbl)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(peso_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(altura_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(nivel_act_fis_lbl)
                             .addGap(18, 18, 18)
@@ -132,11 +149,6 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
                         .addComponent(agregar_pac_lbl)
                         .addGap(472, 472, 472))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(267, 267, 267)
-                    .addComponent(id_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(583, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(793, Short.MAX_VALUE)
                     .addComponent(peso_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,16 +159,18 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(id_lbl)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(id_lbl)
                                 .addGap(29, 29, 29)
                                 .addComponent(nombre_lbl)
                                 .addGap(18, 18, 18)
                                 .addComponent(apellidos_lbl))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
+                                .addGap(129, 129, 129)
+                                .addComponent(id_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(nombre_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(apellidos_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -179,7 +193,7 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
                         .addComponent(peso_lbl)
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(peso_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(altura_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(altura_lbl))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,11 +204,6 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(132, 132, 132)
-                    .addComponent(id_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(308, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
                     .addGap(141, 141, 141)
                     .addComponent(peso_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(299, Short.MAX_VALUE)))
@@ -203,9 +212,81 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void peso_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peso_txtActionPerformed
+    private void altura_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altura_txtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_peso_txtActionPerformed
+    }//GEN-LAST:event_altura_txtActionPerformed
+
+    private void agregar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_btnActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+        String identificacion = id_txt1.getText().trim(); 
+        String nombre = nombre_txt1.getText().trim();
+        String apellidos = apellidos_txt.getText().trim();
+        String fecha_nac = fecha_nac_txt.getText().trim();
+        String sexo = sexo_cmbbox.getSelectedItem().toString().trim(); 
+        //char sexo_char = sexo.charAt(0);
+        String fecha_reg = fecha_reg_txt.getText().trim(); 
+        String peso = peso_txt1.getText().trim(); 
+        BigDecimal pesoBD = new BigDecimal(peso);
+        String altura = altura_txt.getText().trim(); 
+        BigDecimal alturaBD = new BigDecimal(altura);
+        
+        
+        
+        
+        Paciente paciente = new Paciente(identificacion, nombre, apellidos, fecha_nac, sexo, fecha_reg);
+        
+        try {
+            
+            if ((identificacion.equalsIgnoreCase("")) || 
+                    (nombre.equalsIgnoreCase("")) || 
+                    (apellidos.equalsIgnoreCase("")) || 
+                    (fecha_nac.equalsIgnoreCase("")) || 
+                    (sexo.equalsIgnoreCase("")) || 
+                    (fecha_reg.equalsIgnoreCase("")) || 
+                    (peso.equalsIgnoreCase("")) || 
+                    (altura.equalsIgnoreCase(""))) {
+
+                    JOptionPane.showMessageDialog(null, 
+                        "Revise los campos de texto, no se puede guardar datos con campos incompletos");
+                    
+
+                }else{
+                DatabaseManager.insertarPaciente(paciente);
+                
+                double imc = DatabaseManager.calcularIMC(Double.parseDouble(peso), Double.parseDouble(altura));
+                String categoria_imc = DatabaseManager.clasificarIMC(imc);
+                String recomendaciones = DatabaseManager.recomendacionesPorIMC(imc);
+                String nivel_actividad_fisica = DatabaseManager.clasificarNivelActividadFisica(imc);
+                
+                Evaluacion eval = new Evaluacion(paciente.getIdentificacion(), rol, fecha_reg, pesoBD, alturaBD, nivel_actividad_fisica, BigDecimal.valueOf(imc), categoria_imc, recomendaciones);
+                
+                
+                DatabaseManager.insertarEvaluacion(eval);
+                JOptionPane.showMessageDialog(null, 
+                        "Se ha guardado el paciente con exito!");
+                
+                id_txt1.setText("");
+                nombre_txt1.setText("");
+                apellidos_txt.setText("");
+                fecha_nac_txt.setText("");
+                sexo_cmbbox.setSelectedIndex(0);
+                fecha_reg_txt.setText("");
+                peso_txt1.setText("");
+                altura_txt.setText("");
+                
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        
+    }//GEN-LAST:event_agregar_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +317,7 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
     private javax.swing.JButton agregar_btn;
     private javax.swing.JLabel agregar_pac_lbl;
     private javax.swing.JLabel altura_lbl;
+    private javax.swing.JTextField altura_txt;
     private javax.swing.JLabel apellidos_lbl;
     private javax.swing.JTextField apellidos_txt;
     private javax.swing.JLabel fecha_nac_lbl;
@@ -249,9 +331,9 @@ public class Agrega_paciente_vista extends javax.swing.JFrame {
     private javax.swing.JLabel nombre_lbl;
     private javax.swing.JTextField nombre_txt1;
     private javax.swing.JLabel peso_lbl;
-    private javax.swing.JTextField peso_txt;
     private javax.swing.JTextField peso_txt1;
     private javax.swing.JComboBox<String> sexo_cmbbox;
     private javax.swing.JLabel sexo_lbl;
     // End of variables declaration//GEN-END:variables
+    public int rol; 
 }

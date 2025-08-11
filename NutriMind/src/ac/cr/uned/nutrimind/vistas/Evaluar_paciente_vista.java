@@ -4,6 +4,12 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import ac.cr.uned.nutrimind.modelos.Evaluacion;
+import ac.cr.uned.nutrimind.modelos.Paciente;
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * 
@@ -39,7 +45,7 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
         peso_lbl = new javax.swing.JLabel();
         peso_txt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        peso_txt1 = new javax.swing.JTextField();
+        altura_txt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         nivel_act_fis_cmbbox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -53,6 +59,11 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
         jLabel2.setText("Identificación: ");
 
         buscar_btn.setText("Buscar");
+        buscar_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar_btnActionPerformed(evt);
+            }
+        });
 
         nutri_lbl.setText("Nutricionista: ");
 
@@ -73,6 +84,11 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
         jScrollPane1.setViewportView(info_txtarea);
 
         guardar_evac_btn.setText("Guardar Evaluación");
+        guardar_evac_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardar_evac_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +110,7 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
                             .addComponent(nutri_txt)
                             .addComponent(fecha_evac_txt)
                             .addComponent(peso_txt)
-                            .addComponent(peso_txt1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
+                            .addComponent(altura_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(44, 44, 44)
@@ -144,7 +160,7 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(peso_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(altura_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -157,6 +173,78 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void guardar_evac_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_evac_btnActionPerformed
+        // TODO add your handling code here:
+        
+        String nutri_id = nutri_txt.getText().trim();
+        double nutri_id_double = Double.parseDouble(nutri_id);
+        BigDecimal nutri_id_DB = BigDecimal.valueOf(nutri_id_double);
+        
+        String fecha_eval = fecha_evac_txt.getText().trim();
+        String peso = peso_txt.getText().trim();
+        String altura = altura_txt.getText().trim();
+        
+        BigDecimal pesoBD = new BigDecimal(peso);
+        
+        BigDecimal alturaBD = new BigDecimal(altura);
+        
+        String nivel_act = nivel_act_fis_cmbbox.getSelectedItem().toString();
+        
+        
+        double imc = DatabaseManager.calcularIMC(Double.parseDouble(peso), Double.parseDouble(altura));
+        String categoria_imc = DatabaseManager.clasificarIMC(imc);
+        String recomendaciones = DatabaseManager.recomendacionesPorIMC(imc);
+        String nivel_actividad_fisica = DatabaseManager.clasificarNivelActividadFisica(imc);
+        
+        Evaluacion eval = new Evaluacion(id_txt.getText().trim(), 2, fecha_eval, pesoBD, alturaBD, nivel_actividad_fisica, BigDecimal.valueOf(imc), categoria_imc, recomendaciones);
+        
+        
+        
+        try{
+            DatabaseManager.insertarEvaluacion(eval);
+            JOptionPane.showMessageDialog(null, 
+                        "Evaluación guardada!");
+            
+            String texto = "IMC: " + String.valueOf(imc) + "\n" + 
+                "Categoría IMC: " + categoria_imc + "\n" + 
+                "Recomendaciones: " + recomendaciones + "\n" + 
+                "Nivel de actividad física: " + nivel_actividad_fisica + "\n";
+        
+            info_txtarea.setText(texto);
+            
+            id_txt.setText("");
+            nutri_txt.setText("");
+            fecha_evac_txt.setText("");
+            peso_txt.setText("");
+            altura_txt.setText("");
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+ 
+        
+    }//GEN-LAST:event_guardar_evac_btnActionPerformed
+
+    private void buscar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_btnActionPerformed
+        // TODO add your handling code here:
+        
+        String identificacion = id_txt.getText().trim();
+        Paciente paciente = new Paciente();
+        try{
+            paciente =  DatabaseManager.obtenerPacientePorIdentificacion(identificacion);
+            if(!paciente.equals(null)){
+                JOptionPane.showMessageDialog(null, 
+                        "Paciente encontrado!");
+            }else{
+                JOptionPane.showMessageDialog(null, 
+                        "Paciente no encontrado, registre al paciente primero");
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_buscar_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +272,7 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField altura_txt;
     private javax.swing.JButton buscar_btn;
     private javax.swing.JLabel evac_lbl;
     private javax.swing.JFormattedTextField fecha_evac_txt;
@@ -200,6 +289,5 @@ public class Evaluar_paciente_vista extends javax.swing.JFrame {
     private javax.swing.JTextField nutri_txt;
     private javax.swing.JLabel peso_lbl;
     private javax.swing.JTextField peso_txt;
-    private javax.swing.JTextField peso_txt1;
     // End of variables declaration//GEN-END:variables
 }

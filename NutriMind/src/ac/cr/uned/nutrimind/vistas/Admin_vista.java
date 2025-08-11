@@ -4,6 +4,8 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  *
@@ -105,10 +107,26 @@ public class Admin_vista extends javax.swing.JFrame {
 
     private void buscar_paciente_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_paciente_btnActionPerformed
         // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> {
+            
+            Buscar_paciente_vista buscarPacienteWindow = new Buscar_paciente_vista();
+            buscarPacienteWindow.setLocationRelativeTo(null);
+            buscarPacienteWindow.setResizable(false);
+            buscarPacienteWindow.setVisible(true);
+        });
     }//GEN-LAST:event_buscar_paciente_btnActionPerformed
 
     private void agregar_paciente_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_paciente_btn1ActionPerformed
         // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> {
+            
+            Agrega_paciente_vista agregarPacienteWindow = new Agrega_paciente_vista();
+            agregarPacienteWindow.setLocationRelativeTo(null);
+            agregarPacienteWindow.setResizable(false);
+            agregarPacienteWindow.setVisible(true);
+        });
     }//GEN-LAST:event_agregar_paciente_btn1ActionPerformed
 
     /**

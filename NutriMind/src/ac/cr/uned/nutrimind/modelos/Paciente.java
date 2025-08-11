@@ -2,7 +2,7 @@
 package ac.cr.uned.nutrimind.modelos;
 
 public class Paciente {
-    private int id;
+    //private int id;
     private String identificacion;
     private String nombre;
     private String apellidos;
@@ -12,9 +12,9 @@ public class Paciente {
 
     // Constructor, getters y setters
     public Paciente() {}
-    public Paciente(int id, String identificacion, String nombre, String apellidos,
+    public Paciente(String identificacion, String nombre, String apellidos,
                     String fechaNacimiento, String sexo, String fechaRegistro) {
-        this.id = id;
+        //this.id = id;
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -22,8 +22,8 @@ public class Paciente {
         this.sexo = sexo;
         this.fechaRegistro = fechaRegistro;
     }
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    //public int getId() { return id; }
+    //public void setId(int id) { this.id = id; }
     public String getIdentificacion() { return identificacion; }
     public void setIdentificacion(String identificacion) { this.identificacion = identificacion; }
     public String getNombre() { return nombre; }

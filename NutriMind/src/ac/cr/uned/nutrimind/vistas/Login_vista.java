@@ -4,6 +4,12 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import ac.cr.uned.nutrimind.modelos.Usuario;
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 /**
  *
  */
@@ -35,6 +41,8 @@ public class Login_vista extends javax.swing.JFrame {
         nutrimind_lbl = new javax.swing.JLabel();
         entrar_btn = new javax.swing.JButton();
         crear_cuenta_btn = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         login_lbl.setText("Log in");
 
@@ -74,11 +82,10 @@ public class Login_vista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(crear_cuenta_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(entrar_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                        .addComponent(login_lbl)
-                        .addComponent(usuario_txtf)
-                        .addComponent(contrasena_txtf)))
+                    .addComponent(entrar_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(login_lbl)
+                    .addComponent(usuario_txtf)
+                    .addComponent(contrasena_txtf))
                 .addGap(208, 208, 208))
         );
         layout.setVerticalGroup(
@@ -108,10 +115,83 @@ public class Login_vista extends javax.swing.JFrame {
 
     private void entrar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrar_btnActionPerformed
         // TODO add your handling code here:
+        
+        String usuario = usuario_txtf.getText().trim(); 
+        
+        char[] passwordChars = contrasena_txtf.getPassword();
+        String contrasena  = new String(passwordChars);
+ 
+        
+        Usuario user = new Usuario(usuario, contrasena);
+        
+        
+        try{
+            boolean confirmacion = DatabaseManager.autenticarUsuario(user);
+            if(confirmacion){
+                String rol_usuario = DatabaseManager.obtenerRolPorUsuario(user.getUsuario());
+                
+                if(rol_usuario.equalsIgnoreCase("ADMIN")){
+                    dispose();
+                    SwingUtilities.invokeLater(() -> {
+            
+                    Admin_vista adminWindow = new Admin_vista();
+                    adminWindow.setLocationRelativeTo(null);
+                    adminWindow.setResizable(false);
+                    adminWindow.setVisible(true);
+                });
+                   
+                }else if(rol_usuario.equalsIgnoreCase("PROF")){
+                    dispose();
+                    SwingUtilities.invokeLater(() -> {
+                    
+                    int rol = 2;
+                        try {
+                            rol = DatabaseManager.obtenerRolIdPorUsuario(user.getUsuario());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                        
+                    Nutricionista_vista nutriWindow = new Nutricionista_vista(rol);
+                    nutriWindow.setLocationRelativeTo(null);
+                    nutriWindow.setResizable(false);
+                    nutriWindow.setVisible(true);
+                });
+                    
+                }else{
+                    dispose();
+                    SwingUtilities.invokeLater(() -> {
+            
+                    Asistente_vista asisWindow = new Asistente_vista();
+                    asisWindow.setLocationRelativeTo(null);
+                    asisWindow.setResizable(false);
+                    asisWindow.setVisible(true);
+                });
+                    
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "No se pudo ingresar, hubo un error, verifique que el usuario exista");
+                usuario_txtf.setText("");
+                contrasena_txtf.setText("");
+            }
+            
+            
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+         
     }//GEN-LAST:event_entrar_btnActionPerformed
 
     private void crear_cuenta_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_cuenta_btnActionPerformed
         // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> {
+            
+            Crear_cuenta_vista crearCuentaWindow = new Crear_cuenta_vista();
+            crearCuentaWindow.setLocationRelativeTo(null);
+            crearCuentaWindow.setResizable(false);
+            crearCuentaWindow.setVisible(true);
+        });
     }//GEN-LAST:event_crear_cuenta_btnActionPerformed
 
     /**

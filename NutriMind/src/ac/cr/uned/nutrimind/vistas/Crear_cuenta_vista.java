@@ -58,7 +58,7 @@ public class Crear_cuenta_vista extends javax.swing.JFrame {
 
         rol_lbl.setText("Rol: ");
 
-        rol_cmbbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Administrador", "Nutricionista ", "Asistente" }));
+        rol_cmbbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "ADMIN", "PROF ", "ASIS" }));
 
         crear_cuenta_btn.setText("Crear Cuenta");
         crear_cuenta_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -93,9 +93,8 @@ public class Crear_cuenta_vista extends javax.swing.JFrame {
                     .addComponent(usuario_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(contrasena_txt)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(crear_cuenta_btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rol_cmbbox, javax.swing.GroupLayout.Alignment.LEADING, 0, 121, Short.MAX_VALUE))
+                    .addComponent(crear_cuenta_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rol_cmbbox, 0, 134, Short.MAX_VALUE)
                     .addComponent(usuario_txt1))
                 .addGap(210, 210, 210))
         );

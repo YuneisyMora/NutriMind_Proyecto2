@@ -5,8 +5,8 @@ package ac.cr.uned.nutrimind.modelos;
 import java.math.BigDecimal;
 
 public class Evaluacion {
-    private int id;
-    private int pacienteId;
+    
+    private String pacienteId;
     private int nutricionistaId;
     private String fechaEvaluacion; // sería mejor LocalDate
     private BigDecimal peso; // kg
@@ -18,10 +18,10 @@ public class Evaluacion {
 
     // Constructor, getters y setters
     public Evaluacion() {}
-    public Evaluacion(int id, int pacienteId, int nutricionistaId, String fechaEvaluacion,
+    public Evaluacion( String pacienteId, int nutricionistaId, String fechaEvaluacion,
                       BigDecimal peso, BigDecimal altura, String nivelActividadFisica,
                       BigDecimal imc, String categoriaImc, String recomendaciones) {
-        this.id = id;
+        
         this.pacienteId = pacienteId;
         this.nutricionistaId = nutricionistaId;
         this.fechaEvaluacion = fechaEvaluacion;
@@ -32,10 +32,10 @@ public class Evaluacion {
         this.categoriaImc = categoriaImc;
         this.recomendaciones = recomendaciones;
     }
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public int getPacienteId() { return pacienteId; }
-    public void setPacienteId(int pacienteId) { this.pacienteId = pacienteId; }
+    //public int getId() { return id; }
+    //public void setId(int id) { this.id = id; }
+    public String getPacienteId() { return pacienteId; }
+    public void setPacienteId(String pacienteId) { this.pacienteId = pacienteId; }
     public int getNutricionistaId() { return nutricionistaId; }
     public void setNutricionistaId(int nutricionistaId) { this.nutricionistaId = nutricionistaId; }
     public String getFechaEvaluacion() { return fechaEvaluacion; }

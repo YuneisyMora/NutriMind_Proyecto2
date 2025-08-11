@@ -40,7 +40,7 @@
                           <Component id="nutri_txt" max="32767" attributes="0"/>
                           <Component id="fecha_evac_txt" max="32767" attributes="0"/>
                           <Component id="peso_txt" max="32767" attributes="0"/>
-                          <Component id="peso_txt1" alignment="0" pref="197" max="32767" attributes="0"/>
+                          <Component id="altura_txt" alignment="0" pref="197" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -107,7 +107,7 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="peso_txt1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="altura_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -141,6 +141,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscar_btnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nutri_lbl">
       <Properties>
@@ -173,7 +176,7 @@
         <Property name="text" type="java.lang.String" value="Altura (cm): "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="peso_txt1">
+    <Component class="javax.swing.JTextField" name="altura_txt">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -214,6 +217,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar Evaluaci&#xf3;n"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardar_evac_btnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
