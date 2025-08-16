@@ -4,8 +4,10 @@
  */
 package ac.cr.uned.nutrimind.vistas;
 
+import ac.cr.uned.nutrimind.resources.DatabaseManager;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -149,6 +151,25 @@ public class Crear_cuenta_vista extends javax.swing.JFrame {
 
     private void crear_cuenta_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_cuenta_btnActionPerformed
         // TODO add your handling code here:
+        String nombre_completo = usuario_txt.getText().trim();
+        String usuario = usuario_txt1.getText().trim();
+        char[] passwordChars = contrasena_txt.getPassword();
+        String password = new String(passwordChars);
+        
+        String rol = rol_cmbbox.getSelectedItem().toString();
+        
+        try{
+            DatabaseManager.insertarUsuarioConRol(nombre_completo, usuario, password, rol);
+            
+            usuario_txt.setText("");
+            usuario_txt1.setText("");
+            contrasena_txt.setText("");
+            JOptionPane.showMessageDialog(null, 
+                        "Usuario insertado!");
+            
+        }catch (Exception ex ){
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_crear_cuenta_btnActionPerformed
 
     private void usuario_txt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuario_txt1ActionPerformed

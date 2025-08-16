@@ -352,6 +352,36 @@ public static List<Evaluacion> obtenerEvaluacionesPorIdentificacion(String ident
 }
 
 
+public static void insertarUsuarioConRol(String nombreCompleto, String usuario, String contrasena, String rol) throws SQLException {
+    // Insertar el usuario en la tabla Usuarios
+    String sqlUsuario = "INSERT INTO Usuarios (usuario, contrasena) VALUES (?, ?)";
+    try (PreparedStatement psUsuario = getConnection().prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS)) {
+        psUsuario.setString(1, usuario);
+        psUsuario.setString(2, contrasena);
+        psUsuario.executeUpdate();
+
+        // Obtener el ID generado del usuario
+        int usuarioId;
+        try (ResultSet rs = psUsuario.getGeneratedKeys()) {
+            if (rs.next()) {
+                usuarioId = rs.getInt(1);
+            } else {
+                throw new SQLException("No se pudo obtener el ID del usuario insertado");
+            }
+        }
+
+        // Insertar el rol correspondiente
+        String sqlRol = "INSERT INTO Roles (usuario_id, nombre, descripcion) VALUES (?, ?, ?)";
+        try (PreparedStatement psRol = getConnection().prepareStatement(sqlRol)) {
+            psRol.setInt(1, usuarioId);
+            psRol.setString(2, rol);
+            psRol.setString(3, nombreCompleto); // Se puede usar como descripción
+            psRol.executeUpdate();
+        }
+    }
+}
+
+
 
 
 
